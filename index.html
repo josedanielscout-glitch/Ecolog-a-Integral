@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecología Integral UCN - Pastoral y Bienestar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f0fdf4;
+        }
+        .tip-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .tip-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(22, 101, 34, 0.15);
+        }
+        .category-pill.active {
+            background-color: #15803d; /* green-700 */
+            color: white;
+            border-color: #15803d;
+            box-shadow: 0 4px 6px -1px rgba(21, 128, 61, 0.3);
+        }
+        
+        /* Estilos para el Slideshow del Banner */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            z-index: 0;
+        }
+        .hero-slide.active {
+            opacity: 1;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(21, 128, 61, 0.5), rgba(6, 78, 59, 0.75));
+            z-index: 1;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .ls-goal-item:hover .ls-icon {
+            transform: scale(1.1) rotate(5deg);
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+        /* Scrollbar suave para los filtros en móvil */
+        .filter-scroll::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen selection:bg-green-200 selection:text-green-900 flex flex-col">
+
+    <!-- Sección Hero con Slideshow -->
+    <section class="hero-section text-white pt-20 pb-32 px-4 mb-0 relative">
+        
+        <!-- Imágenes de Fondo Cambiantes -->
+        <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&q=80&w=2000');"></div> <!-- Bosque -->
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&q=80&w=2000');"></div> <!-- Naturaleza/Niebla -->
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=2000');"></div> <!-- Planta/Manos -->
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&q=80&w=2000');"></div> <!-- Energía Renovable -->
+
+        <!-- Capa Verde Superpuesta -->
+        <div class="hero-overlay"></div>
+        
+        <!-- Degradado inferior para mezclar con el fondo -->
+        <div class="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-[#f0fdf4] to-transparent z-10 pointer-events-none"></div>
+        
+        <!-- Decoración de fondo sutil -->
+        <div class="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 pointer-events-none z-[2]"></div>
+
+        <div class="max-w-7xl mx-auto relative z-20 flex flex-col items-center text-center">
+            
+            <!-- Badge Superior -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel mb-8 shadow-lg">
+                <span class="w-2 h-2 rounded-full bg-green-300 animate-pulse"></span>
+                <span class="text-xs font-bold tracking-widest uppercase text-green-50">Pastoral y Bienestar Institucional</span>
+            </div>
+
+            <!-- Título Principal -->
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-8 drop-shadow-xl leading-tight">
+                Ecología Integral <span class="text-green-300">UCN</span>
+            </h1>
+
+            <!-- Cita Destacada (Ajustada a text-base md:text-2xl) -->
+            <div class="max-w-3xl mx-auto">
+                <p class="text-base md:text-2xl text-white/95 font-light leading-relaxed italic drop-shadow-md">
+                    "No hay dos crisis separadas, una ambiental y otra social, sino una sola y compleja crisis socio-ambiental."
+                </p>
+                <div class="mt-6 flex items-center justify-center gap-3 opacity-90">
+                    <div class="h-px w-10 bg-green-300"></div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-green-200">Papa Francisco, Laudato Si'</span>
+                    <div class="h-px w-10 bg-green-300"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Texto Exploratorio -->
+    <div class="max-w-6xl mx-auto px-6 mb-12 text-center">
+        <h2 class="text-2xl md:text-3xl font-bold text-green-900 mb-4">
+            Pequeñas acciones, grandes cambios
+        </h2>
+        <p class="text-lg text-green-700/80 font-medium leading-relaxed max-w-3xl mx-auto">
+            Explora prácticas cotidianas que sanan nuestra <span class="text-green-600 font-bold bg-green-100 px-2 py-0.5 rounded-md">Casa Común</span>. 
+            Cada gesto cuenta como un acto de amor hacia la creación.
+        </p>
+    </div>
+
+    <!-- Navegación de Búsqueda y Filtros -->
+    <main class="max-w-6xl mx-auto px-4 relative z-20 flex-grow mb-16">
+        
+        <div class="bg-white rounded-3xl shadow-xl p-6 mb-10 border border-green-100/50">
+            <div class="flex flex-col gap-8">
+                <div class="w-full relative group">
+                    <input type="text" id="searchInput" placeholder="¿Qué acción quieres realizar hoy? (ej. 'agua', 'plástico', 'energía')..." class="w-full pl-14 pr-6 py-5 border-2 border-green-100 rounded-full focus:outline-none focus:border-green-600 focus:ring-4 focus:ring-green-600/10 transition-all text-gray-700 bg-green-50/30 text-lg placeholder-green-800/40">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-green-500 absolute left-5 top-5 group-focus-within:text-green-700 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </div>
+                
+                <!-- Botones de Categoría en Cuadrícula -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+                    <button onclick="filterTips('todos')" class="category-pill active w-full flex flex-col items-center justify-center gap-1 px-2 py-4 rounded-2xl border-2 border-green-50 text-green-800 text-sm font-bold hover:bg-green-50 hover:border-green-200 transition-all duration-200">
+                        <span class="text-2xl mb-1">🌟</span> Todos
+                    </button>
+                    <button onclick="filterTips('reciclaje')" class="category-pill w-full flex flex-col items-center justify-center gap-1 px-2 py-4 rounded-2xl border-2 border-green-50 text-green-800 text-sm font-bold hover:bg-green-50 hover:border-green-200 transition-all duration-200">
+                        <span class="text-2xl mb-1">♻️</span> Reciclaje
+                    </button>
+                    <button onclick="filterTips('agua')" class="category-pill w-full flex flex-col items-center justify-center gap-1 px-2 py-4 rounded-2xl border-2 border-green-50 text-green-800 text-sm font-bold hover:bg-green-50 hover:border-green-200 transition-all duration-200">
+                        <span class="text-2xl mb-1">💧</span> Agua
+                    </button>
+                    <button onclick="filterTips('energia')" class="category-pill w-full flex flex-col items-center justify-center gap-1 px-2 py-4 rounded-2xl border-2 border-green-50 text-green-800 text-sm font-bold hover:bg-green-50 hover:border-green-200 transition-all duration-200">
+                        <span class="text-2xl mb-1">⚡</span> Energía
+                    </button>
+                    <button onclick="filterTips('comida')" class="category-pill w-full flex flex-col items-center justify-center gap-1 px-2 py-4 rounded-2xl border-2 border-green-50 text-green-800 text-sm font-bold hover:bg-green-50 hover:border-green-200 transition-all duration-200">
+                        <span class="text-2xl mb-1">🍎</span> Comida
+                    </button>
+                    <button onclick="filterTips('hogar')" class="category-pill w-full flex flex-col items-center justify-center gap-1 px-2 py-4 rounded-2xl border-2 border-green-50 text-green-800 text-sm font-bold hover:bg-green-50 hover:border-green-200 transition-all duration-200">
+                        <span class="text-2xl mb-1">🏠</span> Hogar
+                    </button>
+                    <button onclick="filterTips('transporte')" class="category-pill w-full flex flex-col items-center justify-center gap-1 px-2 py-4 rounded-2xl border-2 border-green-50 text-green-800 text-sm font-bold hover:bg-green-50 hover:border-green-200 transition-all duration-200">
+                        <span class="text-2xl mb-1">🚲</span> Transporte
+                    </button>
+                    <button onclick="filterTips('tecnologia')" class="category-pill w-full flex flex-col items-center justify-center gap-1 px-2 py-4 rounded-2xl border-2 border-green-50 text-green-800 text-sm font-bold hover:bg-green-50 hover:border-green-200 transition-all duration-200">
+                        <span class="text-2xl mb-1">📱</span> Tecnología
+                    </button>
+                    <button onclick="filterTips('naturaleza')" class="category-pill w-full flex flex-col items-center justify-center gap-1 px-2 py-4 rounded-2xl border-2 border-green-50 text-green-800 text-sm font-bold hover:bg-green-50 hover:border-green-200 transition-all duration-200">
+                        <span class="text-2xl mb-1">🌿</span> Naturaleza
+                    </button>
+                    <button onclick="filterTips('comunidad')" class="category-pill w-full flex flex-col items-center justify-center gap-1 px-2 py-4 rounded-2xl border-2 border-green-50 text-green-800 text-sm font-bold hover:bg-green-50 hover:border-green-200 transition-all duration-200">
+                        <span class="text-2xl mb-1">🤝</span> Comunidad
+                    </button>
+                    <button onclick="filterTips('moda')" class="category-pill w-full flex flex-col items-center justify-center gap-1 px-2 py-4 rounded-2xl border-2 border-green-50 text-green-800 text-sm font-bold hover:bg-green-50 hover:border-green-200 transition-all duration-200">
+                        <span class="text-2xl mb-1">👗</span> Moda
+                    </button>
+                    <button onclick="filterTips('mascotas')" class="category-pill w-full flex flex-col items-center justify-center gap-1 px-2 py-4 rounded-2xl border-2 border-green-50 text-green-800 text-sm font-bold hover:bg-green-50 hover:border-green-200 transition-all duration-200">
+                        <span class="text-2xl mb-1">🐾</span> Mascotas
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contador -->
+        <div class="mb-6 flex items-center gap-2 px-2">
+            <div class="h-px bg-green-200 flex-grow"></div>
+            <span class="text-sm font-bold text-green-800 bg-green-50 px-3 py-1 rounded-full border border-green-200">
+                Mostrando <span id="tipsCount" class="text-green-600">0</span> prácticas de Ecología Integral
+            </span>
+            <div class="h-px bg-green-200 flex-grow"></div>
+        </div>
+
+        <!-- Rejilla de Trucos -->
+        <div id="tipsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            <!-- Contenido dinámico -->
+        </div>
+
+        <div id="emptyState" class="hidden text-center py-24 bg-white rounded-3xl border-2 border-dashed border-green-200">
+            <div class="text-6xl mb-4">🍃</div>
+            <h3 class="text-2xl font-bold text-green-900 mb-2">No encontramos resultados</h3>
+            <p class="text-green-600">Intenta buscar con otra palabra clave o selecciona "Todos".</p>
+        </div>
+    </main>
+
+    <!-- Sección Objetivos Laudato Si' -->
+    <section class="bg-[#064e3b] text-white py-16 px-4 mt-auto border-t-4 border-green-600 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/wood-pattern.png')] opacity-10"></div>
+        
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="text-center mb-12">
+                <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-green-300 mb-3">
+                    Nuestro Compromiso
+                </h3>
+                <h2 class="text-3xl md:text-4xl font-bold">Objetivos Laudato Si'</h2>
+                <div class="w-24 h-1 bg-green-500 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-8 md:gap-10">
+                <div class="ls-goal-item flex flex-col items-center gap-4 group cursor-default p-2 w-[40%] sm:w-[28%] lg:w-[21%]">
+                    <div class="ls-icon w-20 h-20 flex items-center justify-center rounded-3xl bg-white/10 text-4xl transition-all duration-300 shadow-lg border border-white/10 text-green-300 group-hover:text-white group-hover:bg-green-600 group-hover:-translate-y-2">🌎</div>
+                    <span class="text-sm font-semibold leading-tight text-center text-green-100 group-hover:text-white transition-colors">Clamor de la<br>Tierra</span>
+                </div>
+                <div class="ls-goal-item flex flex-col items-center gap-4 group cursor-default p-2 w-[40%] sm:w-[28%] lg:w-[21%]">
+                    <div class="ls-icon w-20 h-20 flex items-center justify-center rounded-3xl bg-white/10 text-4xl transition-all duration-300 shadow-lg border border-white/10 text-green-300 group-hover:text-white group-hover:bg-green-600 group-hover:-translate-y-2">🤲</div>
+                    <span class="text-sm font-semibold leading-tight text-center text-green-100 group-hover:text-white transition-colors">Clamor de los<br>Pobres</span>
+                </div>
+                <div class="ls-goal-item flex flex-col items-center gap-4 group cursor-default p-2 w-[40%] sm:w-[28%] lg:w-[21%]">
+                    <div class="ls-icon w-20 h-20 flex items-center justify-center rounded-3xl bg-white/10 text-4xl transition-all duration-300 shadow-lg border border-white/10 text-green-300 group-hover:text-white group-hover:bg-green-600 group-hover:-translate-y-2">⚖️</div>
+                    <span class="text-sm font-semibold leading-tight text-center text-green-100 group-hover:text-white transition-colors">Economía<br>Ecológica</span>
+                </div>
+                <div class="ls-goal-item flex flex-col items-center gap-4 group cursor-default p-2 w-[40%] sm:w-[28%] lg:w-[21%]">
+                    <div class="ls-icon w-20 h-20 flex items-center justify-center rounded-3xl bg-white/10 text-4xl transition-all duration-300 shadow-lg border border-white/10 text-green-300 group-hover:text-white group-hover:bg-green-600 group-hover:-translate-y-2">🚲</div>
+                    <span class="text-sm font-semibold leading-tight text-center text-green-100 group-hover:text-white transition-colors">Estilos de Vida<br>Sostenibles</span>
+                </div>
+                <div class="ls-goal-item flex flex-col items-center gap-4 group cursor-default p-2 w-[40%] sm:w-[28%] lg:w-[21%]">
+                    <div class="ls-icon w-20 h-20 flex items-center justify-center rounded-3xl bg-white/10 text-4xl transition-all duration-300 shadow-lg border border-white/10 text-green-300 group-hover:text-white group-hover:bg-green-600 group-hover:-translate-y-2">📚</div>
+                    <span class="text-sm font-semibold leading-tight text-center text-green-100 group-hover:text-white transition-colors">Educación<br>Ecológica</span>
+                </div>
+                <div class="ls-goal-item flex flex-col items-center gap-4 group cursor-default p-2 w-[40%] sm:w-[28%] lg:w-[21%]">
+                    <div class="ls-icon w-20 h-20 flex items-center justify-center rounded-3xl bg-white/10 text-4xl transition-all duration-300 shadow-lg border border-white/10 text-green-300 group-hover:text-white group-hover:bg-green-600 group-hover:-translate-y-2">✨</div>
+                    <span class="text-sm font-semibold leading-tight text-center text-green-100 group-hover:text-white transition-colors">Espiritualidad<br>Ecológica</span>
+                </div>
+                <div class="ls-goal-item flex flex-col items-center gap-4 group cursor-default p-2 w-[40%] sm:w-[28%] lg:w-[21%]">
+                    <div class="ls-icon w-20 h-20 flex items-center justify-center rounded-3xl bg-white/10 text-4xl transition-all duration-300 shadow-lg border border-white/10 text-green-300 group-hover:text-white group-hover:bg-green-600 group-hover:-translate-y-2">🏘️</div>
+                    <span class="text-sm font-semibold leading-tight text-center text-green-100 group-hover:text-white transition-colors">Resiliencia<br>Comunitaria</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-green-950 text-center py-8 text-green-100/40 text-sm font-medium">
+        <p>Universidad Católica del Norte — Pastoral y Bienestar Institucional</p>
+        <p class="mt-1 text-xs">Cuidando nuestra Casa Común</p>
+    </footer>
+
+    <script>
+        // Lógica del Slideshow
+        const slides = document.querySelectorAll('.hero-slide');
+        let currentSlide = 0;
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        setInterval(nextSlide, 5000);
+
+        // Base de datos de trucos (se mantiene igual que la versión anterior)
+        const tips = [
+            { id: 181, title: "Armario Cápsula", description: "Reduce tu ropa a prendas básicas y combinables. Menos ropa significa menos decisiones y menos residuos.", category: "moda", icon: "👗" },
+            { id: 182, title: "Lava menos", description: "Lavar la ropa desgasta las fibras y gasta agua. Si no huele mal ni tiene manchas, ventílala y úsala de nuevo.", category: "moda", icon: "🌬️" },
+            { id: 183, title: "Bolsa de lavado", description: "Usa bolsas tipo Guppyfriend para lavar sintéticos; atrapan los microplásticos antes de que vayan al mar.", category: "moda", icon: "🌊" },
+            { id: 184, title: "Repara calcetines", description: "Aprender a zurcir es revolucionario. No tires un par de calcetines por un pequeño agujero.", category: "moda", icon: "🧦" },
+            { id: 185, title: "Alquiler para eventos", description: "No compres un vestido o traje que usarás una vez. Alquila y ahorra dinero y recursos.", category: "moda", icon: "🎩" },
+            { id: 186, title: "Segunda mano", description: "Comprar ropa usada evita la producción de ropa nueva y da una segunda vida a prendas en buen estado.", category: "moda", icon: "🛍️" },
+            { id: 187, title: "Fibras naturales", description: "Elige algodón orgánico, lino o cáñamo. Son biodegradables, a diferencia del poliéster (plástico).", category: "moda", icon: "🌿" },
+            { id: 188, title: "Intercambio de ropa", description: "Organiza una 'Swap Party' con amigos. Renuevas tu armario gratis y sin impacto ambiental.", category: "moda", icon: "🔄" },
+            { id: 189, title: "Zapatos de calidad", description: "Invierte en buen calzado que se pueda reparar en el zapatero, en lugar de zapatillas desechables.", category: "moda", icon: "👞" },
+            { id: 190, title: "Lee las etiquetas", description: "Evita mezclas complejas de tejidos (ej. algodón + poliéster) porque son casi imposibles de reciclar.", category: "moda", icon: "🏷️" },
+            { id: 191, title: "Agua fría", description: "Lavar la ropa con agua fría mantiene los colores vivos más tiempo y ahorra mucha energía.", category: "moda", icon: "❄️" },
+            { id: 192, title: "Secado al aire", description: "La secadora rompe las fibras de la ropa, acortando su vida útil. Tiende al sol.", category: "moda", icon: "☀️" },
+            { id: 193, title: "Donar con cabeza", description: "Dona solo ropa limpia y en buen estado. La ropa rota debe ir a contenedores de reciclaje textil.", category: "moda", icon: "🎁" },
+            { id: 194, title: "Upcycling", description: "Transforma unos jeans viejos en un bolso o unos shorts. Creatividad antes que consumo.", category: "moda", icon: "✂️" },
+            { id: 195, title: "Marcas éticas", description: "Si compras nuevo, apoya marcas que garanticen salarios justos y transparencia ecológica.", category: "moda", icon: "✅" },
+            { id: 196, title: "Cuidado del cuero", description: "Hidrata tus artículos de cuero para que no se agrieten y duren décadas.", category: "moda", icon: "👜" },
+            { id: 197, title: "Evita el planchado", description: "Tiende bien la ropa para evitar arrugas. Planchar consume mucha energía y daña tejidos.", category: "moda", icon: "👔" },
+            { id: 198, title: "Tintes naturales", description: "Busca ropa teñida sin metales pesados o aprende a teñir en casa con aguacate o té.", category: "moda", icon: "🎨" },
+            { id: 199, title: "Botones de repuesto", description: "Guarda los botones extra que vienen con la ropa. Te salvarán de tirar una camisa.", category: "moda", icon: "🧵" },
+            { id: 200, title: "Calidad vs Cantidad", description: "Una camiseta buena de 30€ dura más que 5 camisetas malas de 6€. A la larga ahorras.", category: "moda", icon: "💎" },
+            { id: 201, title: "Bolsas compostables", description: "Usa bolsas certificadas para recoger los excrementos. Las de plástico tardan siglos en degradarse.", category: "mascotas", icon: "💩" },
+            { id: 202, title: "Adopta, no compres", description: "Hay miles de animales esperando hogar. Fomentar la cría consume recursos innecesarios.", category: "mascotas", icon: "🐕" },
+            { id: 203, title: "Juguetes DIY", description: "Un tubo de cartón o una camiseta vieja trenzada son juguetes excelentes y gratis.", category: "mascotas", icon: "🧶" },
+            { id: 204, title: "Arena ecológica", description: "Para gatos, usa lechos de madera, papel o maíz aglomerante. Son biodegradables y sin sílice.", category: "mascotas", icon: "🐈" },
+            { id: 205, title: "Comida a granel", description: "Compra el pienso en sacos grandes o a granel para reducir la cantidad de envases plásticos.", category: "mascotas", icon: "🍲" },
+            { id: 206, title: "Champú natural", description: "Usa jabones sin parabenos ni sulfatos. Es mejor para la piel de tu mascota y para el agua.", category: "mascotas", icon: "🧼" },
+            { id: 207, title: "Camas recicladas", description: "Rellena la cama de tu mascota con ropa vieja tuya. Les encantará tu olor y reciclas textil.", category: "mascotas", icon: "🛏️" },
+            { id: 208, title: "Esterilización", description: "Controlar la población evita el abandono y el impacto ecológico de animales callejeros.", category: "mascotas", icon: "🏥" },
+            { id: 209, title: "Premios caseros", description: "Hornea galletas simples para tu perro. Evitas conservantes y envases industriales.", category: "mascotas", icon: "🍪" },
+            { id: 210, title: "Paseos locales", description: "No cojas el coche para ir a pasear al perro. Explora tu barrio a pie.", category: "mascotas", icon: "🚶" },
+            { id: 211, title: "Placas duraderas", description: "Elige una placa de metal grabada de buena calidad para no tener que cambiarla cada año.", category: "mascotas", icon: "🏷️" },
+            { id: 212, title: "Cuidado con la fauna", description: "Si tienes gato, ponle un cascabel o evita que salga libre para proteger a las aves locales.", category: "mascotas", icon: "🐦" },
+            { id: 213, title: "Dona accesorios", description: "Correas o comederos que ya no uses pueden ser muy útiles en refugios de animales.", category: "mascotas", icon: "🎁" },
+            { id: 214, title: "Antiparasitarios", description: "Consulta opciones menos tóxicas. Algunos collares químicos son muy contaminantes para el agua.", category: "mascotas", icon: "💊" },
+            { id: 215, title: "Comederos de cerámica", description: "Evita los de plástico. El acero o la cerámica son más higiénicos y duraderos.", category: "mascotas", icon: "🥣" },
+            { id: 216, title: "Cepillado frecuente", description: "Cepillar a menudo reduce la necesidad de aspirar la casa (ahorro de luz) y bañar al animal.", category: "mascotas", icon: "✂️" },
+            { id: 217, title: "Transportín prestado", description: "Si viajas poco, pide prestado el transportín en lugar de comprar uno para guardarlo.", category: "mascotas", icon: "✈️" },
+            { id: 218, title: "Vinagre para olores", description: "Limpia los accidentes en casa con vinagre y bicarbonato en lugar de limpiadores químicos fuertes.", category: "mascotas", icon: "🍋" },
+            { id: 219, title: "Latas al reciclaje", description: "Lava bien las latas de comida húmeda antes de tirarlas al contenedor amarillo.", category: "mascotas", icon: "♻️" },
+            { id: 220, title: "Manta vieja en el coche", description: "Usa mantas viejas para proteger la tapicería en lugar de fundas plásticas desechables.", category: "mascotas", icon: "🚗" },
+            { id: 161, title: "Lava los envases", description: "Un enjuague rápido evita malos olores y plagas, facilitando el trabajo en la planta de reciclaje.", category: "reciclaje", icon: "🚿" },
+            { id: 162, title: "Cajas de pizza", description: "El cartón con grasa NO se recicla (va al orgánico o resto). Solo la parte limpia de la tapa va al azul.", category: "reciclaje", icon: "🍕" },
+            { id: 163, title: "Vidrio vs Cristal", description: "Copas, espejos o ventanas rotas NO van al contenedor verde. Tienen distinta composición que las botellas.", category: "reciclaje", icon: "🍷" },
+            { id: 164, title: "Aplasta envases", description: "Saca el aire de botellas y briks antes de tirar. Ahorras espacio en casa y en el camión de recogida.", category: "reciclaje", icon: "🦶" },
+            { id: 165, title: "Punto SIGRE", description: "Medicamentos caducados o envases vacíos de medicinas van al contenedor de la farmacia, nunca a la basura.", category: "reciclaje", icon: "💊" },
+            { id: 166, title: "Aceite usado", description: "Nunca por el desagüe. Guárdalo en botella y llévalo al contenedor naranja o punto limpio.", category: "reciclaje", icon: "🛢️" },
+            { id: 167, title: "Pilas y Baterías", description: "Contienen metales pesados muy tóxicos. Usa los contenedores específicos en paradas o súper.", category: "reciclaje", icon: "🔋" },
+            { id: 168, title: "Aerosoles vacíos", description: "Si es envase (desodorante) vacío, al amarillo. Si tiene producto o es pintura, al punto limpio.", category: "reciclaje", icon: "💨" },
+            { id: 169, title: "Servilletas sucias", description: "Papel de cocina o servilletas usadas van al orgánico, no al papel, porque la suciedad arruina el lote.", category: "reciclaje", icon: "🧻" },
+            { id: 170, title: "Pasta de dientes", description: "El tubo vacío es un envase de plástico, así que va al contenedor amarillo.", category: "reciclaje", icon: "🦷" },
+            { id: 171, title: "Juguetes rotos", description: "Aunque sean de plástico, no son envases. Van al punto limpio o contenedor de resto.", category: "reciclaje", icon: "🧸" },
+            { id: 172, title: "Bombillas", description: "Nunca al vidrio. Llévalas a ferreterías o puntos limpios para recuperar mercurio y vidrio especial.", category: "reciclaje", icon: "💡" },
+            { id: 173, title: "Briks", description: "Van al amarillo, no al cartón. Están hechos de capas de cartón, plástico y aluminio.", category: "reciclaje", icon: "🧃" },
+            { id: 174, title: "Perchas", description: "Si compras ropa con ellas, devuélvelas para reuso. Si se rompen, suelen ir al resto o punto limpio.", category: "reciclaje", icon: "👗" },
+            { id: 175, title: "Tapones solidarios", description: "Separa los tapones de plástico duro (HDPE). Muchas ONGs los recogen para financiar ayudas.", category: "reciclaje", icon: "💙" },
+            { id: 176, title: "Etiquetas en vidrio", description: "No hace falta quitar las etiquetas de papel de los tarros, el proceso industrial lo hace bien.", category: "reciclaje", icon: "🏷️" },
+            { id: 177, title: "Papel de aluminio", description: "Es 100% reciclable. Haz una bola grande con los trozos pequeños para que no se pierdan.", category: "reciclaje", icon: "🌯" },
+            { id: 178, title: "Cápsulas de café", description: "La mayoría no van al amarillo. Usa los puntos de recogida de la marca o compra recargables.", category: "reciclaje", icon: "☕" },
+            { id: 179, title: "Basura electrónica", description: "Cables, ratones o cargadores viejos van siempre al punto limpio o tiendas de electrodomésticos.", category: "reciclaje", icon: "🖱️" },
+            { id: 180, title: "Tapas separadas", description: "Si puedes, separa la tapa del envase. A veces son plásticos distintos que se reciclan por separado.", category: "reciclaje", icon: "🍾" },
+            { id: 1, title: "Agua de pasta para riego", description: "Aprovecha el almidón del agua de cocción (fría y sin sal) para fertilizar tus plantas.", category: "agua", icon: "💧" },
+            { id: 2, title: "Duchas de 5 minutos", description: "Reduce el tiempo de ducha. Cada minuto ahorra unos 12 litros de agua potable.", category: "agua", icon: "🚿" },
+            { id: 3, title: "Recogida de pluviales", description: "Usa cubos para recoger lluvia. Úsala para limpiar el suelo o regar macetas.", category: "agua", icon: "🌧️" },
+            { id: 4, title: "Cisterna con botella", description: "Pon una botella de agua llena dentro del tanque del WC para reducir el volumen de descarga.", category: "agua", icon: "🚽" },
+            { id: 5, title: "Lavado en bol", description: "Lava frutas y verduras en un recipiente en lugar de bajo el grifo abierto.", category: "agua", icon: "🍎" },
+            { id: 6, title: "Aireadores en grifos", description: "Instala difusores en los grifos. Reducen el caudal manteniendo la sensación de presión.", category: "agua", icon: "🚰" },
+            { id: 7, title: "No uses el WC como papelera", description: "Evita tirar papeles o basura al inodoro. Ahorrarás descargas innecesarias.", category: "agua", icon: "🗑️" },
+            { id: 8, title: "Lavar coche con cubo", description: "Usa un cubo y esponja en vez de manguera. Ahorrarás hasta 300 litros de agua.", category: "agua", icon: "🚗" },
+            { id: 9, title: "Repara goteos", description: "Un grifo que gotea pierde hasta 30 litros al día. Cambia la arandela cuanto antes.", category: "agua", icon: "🛠️" },
+            { id: 10, title: "Carga completa siempre", description: "No pongas la lavadora o el lavavajillas a medias. Maximiza cada ciclo.", category: "agua", icon: "🧺" },
+            { id: 11, title: "Dientes y grifo cerrado", description: "Cierra el grifo mientras te cepillas. Ahorras 6 litros de agua cada vez.", category: "agua", icon: "🪥" },
+            { id: 12, title: "Descongela en nevera", description: "No uses el chorro de agua caliente para descongelar. Planifica y usa la nevera.", category: "agua", icon: "❄️" },
+            { id: 13, title: "Uso de lavavajillas", description: "Si es eficiente, consume menos agua que lavar los platos a mano.", category: "agua", icon: "🍽️" },
+            { id: 14, title: "Riego al anochecer", description: "Riega las plantas de noche para evitar la evaporación inmediata por el sol.", category: "agua", icon: "🌙" },
+            { id: 15, title: "Recogida de agua fría", description: "Recoge el agua que sale fría mientras esperas la caliente para fregar o regar.", category: "agua", icon: "🪣" },
+            { id: 16, title: "Cubierta de piscina", description: "Cubre tu piscina cuando no la uses para reducir la evaporación del agua.", category: "agua", icon: "🏊" },
+            { id: 17, title: "Plantas locales", description: "Elige especies autóctonas (xeriscape). Requieren mucha menos agua que las exóticas.", category: "agua", icon: "🌵" },
+            { id: 18, title: "Barrer en vez de manguera", description: "Limpia patios y aceras con escoba, nunca con agua a presión.", category: "agua", icon: "🧹" },
+            { id: 19, title: "Agua de acuario", description: "El agua vieja de los peces es rica en nitrógeno y fósforo, excelente para plantas.", category: "agua", icon: "🐟" },
+            { id: 20, title: "Vaporizar ropa", description: "Refresca prendas con un pulverizador de agua y vinagre en lugar de lavarlas por un solo uso.", category: "agua", icon: "👕" },
+            { id: 21, title: "Calor residual", description: "Apaga el fuego de la cocina 5 minutos antes. El calor acumulado terminará el plato.", category: "energia", icon: "🍳" },
+            { id: 22, title: "Bombillas LED", description: "Cambia todas las luces por LED. Consumen un 80% menos y duran años.", category: "energia", icon: "💡" },
+            { id: 23, title: "Desenchufa vampiros", description: "Los cargadores conectados sin dispositivo siguen consumiendo. Usa regletas con interruptor.", category: "energia", icon: "🔌" },
+            { id: 24, title: "Nevera a 5 grados", description: "Es la temperatura ideal. Cada grado menos aumenta el consumo un 5% innecesariamente.", category: "energia", icon: "❄️" },
+            { id: 25, title: "Limpia los filtros", description: "Mantén limpios los filtros del aire acondicionado y calefacción para que trabajen sin esfuerzo.", category: "energia", icon: "🌬️" },
+            { id: 26, title: "Secado al sol", description: "La secadora es de los aparatos que más consume. El sol es gratis y desinfecta.", category: "energia", icon: "☀️" },
+            { id: 27, title: "Lavar en frío", description: "El 90% de la energía de la lavadora se va en calentar agua. Usa ciclos fríos.", category: "energia", icon: "🧺" },
+            { id: 28, title: "Cortinas térmicas", description: "Usa cortinas gruesas en invierno para retener el calor y claras en verano para reflejarlo.", category: "energia", icon: "🪟" },
+            { id: 29, title: "Burletes en puertas", description: "Evita que el calor se escape por rendijas con tiras aislantes sencillas.", category: "energia", icon: "🚪" },
+            { id: 30, title: "Hierve solo lo necesario", description: "Si vas a tomar una taza de té, no llenes la hervidora. Ahorrarás minutos de luz.", category: "energia", icon: "☕" },
+            { id: 31, title: "Tapa las ollas", description: "Cocinar con tapa ahorra un 25% de energía al concentrar el calor rápidamente.", category: "energia", icon: "🥘" },
+            { id: 32, title: "Planchado masivo", description: "Acumula la ropa y plancha todo a la vez para no calentar la plancha varias veces.", category: "energia", icon: "👔" },
+            { id: 33, title: "Sensores de movimiento", description: "Instálalos en garajes o pasillos para que las luces no se queden encendidas por descuido.", category: "energia", icon: "🚶" },
+            { id: 34, title: "Paredes claras", description: "Pintar el interior de blanco maximiza la luz natural y reduce la necesidad de lámparas.", category: "energia", icon: "🎨" },
+            { id: 35, title: "Adiós al Stand-by", description: "Esa lucecita roja puede sumar 50€ al año en tu factura. Apaga del todo.", category: "energia", icon: "🔴" },
+            { id: 36, title: "No abras el horno", description: "Cada vez que abres la puerta del horno pierde el 20% del calor acumulado.", category: "energia", icon: "🍪" },
+            { id: 37, title: "Ventilación exprés", description: "10 minutos bastan para renovar el aire sin enfriar las paredes de la casa.", category: "energia", icon: "💨" },
+            { id: 38, title: "Microondas vs Horno", description: "Para calentar raciones pequeñas, el microondas es mucho más eficiente que el horno.", category: "energia", icon: "📟" },
+            { id: 39, title: "Limpia las bombillas", description: "El polvo bloquea la luz. Limpiarlas te permite usar bombillas de menor potencia.", category: "energia", icon: "✨" },
+            { id: 40, title: "Ubicación de la nevera", description: "No la pongas junto al horno o donde le dé el sol directo para que no trabaje extra.", category: "energia", icon: "📍" },
+            { id: 41, title: "Compostaje casero", description: "Convierte tus restos de verdura y frutas en abono. Reduces basura y nutres tierra.", category: "comida", icon: "🌿" },
+            { id: 42, title: "Fruta de temporada", description: "Requiere menos invernaderos y transporte. Es más sana, barata y ecológica.", category: "comida", icon: "📅" },
+            { id: 43, title: "Transforma sobras", description: "El pan duro es pudding, la verdura es caldo. No tires nada sin antes transformarlo.", category: "comida", icon: "🍲" },
+            { id: 44, title: "Lunes sin carne", description: "Reducir la carne un día ayuda a bajar drásticamente la huella de metano y agua.", category: "comida", icon: "🥗" },
+            { id: 45, title: "Compra a granel", description: "Lleva tus propios tarros. Evitas el plástico de un solo uso en legumbres y cereales.", category: "comida", icon: "⚖️" },
+            { id: 46, title: "Mini huerto", description: "Incluso en un balcón puedes cultivar lechugas o hierbas aromáticas.", category: "comida", icon: "🪴" },
+            { id: 47, title: "Evita procesados", description: "Los ultraprocesados tienen una huella industrial y de envases enorme. Cocina real.", category: "comida", icon: "🥕" },
+            { id: 48, title: "Agua del grifo", description: "Si es potable en tu zona, deja de comprar botellas. Usa filtros si es necesario.", category: "comida", icon: "🚰" },
+            { id: 49, title: "Tuppers de vidrio", description: "Duran para siempre, no sueltan tóxicos y son reciclables infinitamente.", category: "comida", icon: "🍱" },
+            { id: 50, title: "Filtros reutilizables", description: "Usa cafetera italiana o filtros de tela para no generar basura cada mañana.", category: "comida", icon: "☕" },
+            { id: 51, title: "Menú semanal", description: "Planificar evita comprar de más y que la comida caduque en la nevera.", category: "comida", icon: "📝" },
+            { id: 52, title: "Dona excedentes", description: "Si tienes comida de sobra, dónala a bancos locales antes de que se estropee.", category: "comida", icon: "🤝" },
+            { id: 53, title: "Té en hojas sueltas", description: "Las bolsas de té suelen contener microplásticos. Usa infusores metálicos.", category: "comida", icon: "🍃" },
+            { id: 54, title: "Fruta 'fea'", description: "Compra piezas con formas raras. Tienen el mismo sabor y evitas que el súper las tire.", category: "comida", icon: "🍍" },
+            { id: 55, title: "Cero aceite de palma", description: "Su producción causa deforestación masiva. Lee las etiquetas y evítalo.", category: "comida", icon: "🌴" },
+            { id: 56, title: "Productos Km 0", description: "Prioriza comida producida a menos de 100km. Menos CO2 de transporte.", category: "comida", icon: "🚜" },
+            { id: 57, title: "Pieles de cítricos", description: "Úsalas para hacer limpiadores naturales con vinagre o para aromatizar la casa.", category: "comida", icon: "🍊" },
+            { id: 58, title: "Reutiliza tarros", description: "Los botes de cristal de conservas son perfectos para guardar especias o pasta.", category: "comida", icon: "🫙" },
+            { id: 59, title: "Dile no al desechable", description: "Evita platos y cubiertos de plástico incluso en fiestas. Usa lo de siempre.", category: "comida", icon: "🍴" },
+            { id: 60, title: "Huesos para caldo", description: "No tires restos orgánicos de carne/pescado; congélalos y haz caldos nutritivos.", category: "comida", icon: "🥣" },
+            { id: 61, title: "Vinagre y Bicarbonato", description: "La pareja perfecta para limpiar casi todo sin químicos nocivos.", category: "hogar", icon: "🧼" },
+            { id: 62, title: "Jabón sólido", description: "Tanto para cuerpo como para platos. Elimina botellas de plástico de tu baño.", category: "hogar", icon: "🧼" },
+            { id: 63, title: "Moda de segunda mano", description: "La industria textil es de las más contaminantes. Reutiliza y dale nueva vida.", category: "hogar", icon: "👕" },
+            { id: 64, title: "Repara antes de tirar", description: "Un zapato, una radio o un jersey. Busca tutoriales; todo suele tener arreglo.", category: "hogar", icon: "🛠️" },
+            { id: 65, title: "Evita los aerosoles", description: "Dañan la capa de ozono y la calidad del aire interior. Usa sprays de bomba.", category: "hogar", icon: "💨" },
+            { id: 66, title: "Aceite al punto limpio", description: "Nunca lo tires por el fregadero. Guárdalo y llévalo a reciclar para biocombustible.", category: "hogar", icon: "🛢️" },
+            { id: 67, title: "Pilas recargables", description: "Una sola pila recargable sustituye a cientos de las normales. Menos metales pesados.", category: "hogar", icon: "🔋" },
+            { id: 68, title: "Minimalismo", description: "Menos es más. Antes de comprar algo nuevo, pregúntate si realmente lo necesitas.", category: "hogar", icon: "🧘" },
+            { id: 69, title: "Cera de abeja", description: "Envoltorios de tela con cera para sustituir el papel de aluminio y el film plástico.", category: "hogar", icon: "🐝" },
+            { id: 70, title: "Bayetas de ropa vieja", description: "Corta camisetas de algodón viejas para limpiar. Absorben mejor que las nuevas.", category: "hogar", icon: "✂️" },
+            { id: 71, title: "Sin suavizante", description: "Contaminan mucho y dañan las fibras. El vinagre en el cajetín suaviza igual.", category: "hogar", icon: "👕" },
+            { id: 72, title: "Recicla bien", description: "Asegúrate de limpiar los envases antes de tirarlos al contenedor correspondiente.", category: "hogar", icon: "♻️" },
+            { id: 73, title: "Evita el Fast Fashion", description: "Compra ropa de calidad que dure años, no tendencias de una semana.", category: "hogar", icon: "👠" },
+            { id: 74, title: "Cerillas vs Mecheros", description: "Los mecheros de plástico son desechos eternos. Usa cerillas de madera.", category: "hogar", icon: "🔥" },
+            { id: 75, title: "Regala experiencias", description: "Cenas, masajes o entradas. No generan residuos y crean mejores recuerdos.", category: "hogar", icon: "🎟️" },
+            { id: 76, title: "Madera certificada", description: "Si compras muebles, busca el sello FSC que garantiza gestión forestal responsable.", category: "hogar", icon: "🌲" },
+            { id: 77, title: "Plantas purificadoras", description: "Potos, cintas o espatifilos ayudan a filtrar tóxicos del aire en casa.", category: "hogar", icon: "🪴" },
+            { id: 78, title: "No a las toallitas", description: "Incluso las 'biodegradables' atascan tuberías. Usa agua y jabón o bidé.", category: "hogar", icon: "🚽" },
+            { id: 79, title: "Fibras naturales", description: "Usa alfombras de yute o algodón en vez de sintéticas (microplásticos).", category: "hogar", icon: "🧶" },
+            { id: 80, title: "Compartir herramientas", description: "¿Necesitas un taladro una vez al año? Pídelo prestado o compártelo.", category: "hogar", icon: "🔨" },
+            { id: 81, title: "Camina lo posible", description: "Para trayectos de menos de 1km, tus piernas son el mejor transporte ecológico.", category: "transporte", icon: "🚶" },
+            { id: 82, title: "Bicicleta al trabajo", description: "Ahorras dinero, haces ejercicio y emites cero CO2. Usa alforjas para la compra.", category: "transporte", icon: "🚲" },
+            { id: 83, title: "Transporte público", description: "Un autobús sustituye a 40 coches en la carretera. Lee un libro mientras viajas.", category: "transporte", icon: "🚌" },
+            { id: 84, title: "Carpooling", description: "Comparte coche con compañeros de trabajo. Menos gastos y menos tráfico.", category: "transporte", icon: "🚗" },
+            { id: 85, title: "Conducción eficiente", description: "Arranca sin acelerar y usa marchas largas. Ahorrarás un 15% de combustible.", category: "transporte", icon: "🛣️" },
+            { id: 86, title: "Presión de ruedas", description: "Unas ruedas bajas de aire aumentan el consumo de gasolina considerablemente.", category: "transporte", icon: "🛞" },
+            { id: 87, title: "Menos vuelos", description: "El avión es el transporte más contaminante por pasajero. Viaja lento cuando puedas.", category: "transporte", icon: "✈️" },
+            { id: 88, title: "Tren sobre avión", description: "Para distancias medias el tren es mucho más eficiente y te deja en el centro.", category: "transporte", icon: "🚄" },
+            { id: 89, title: "Maletero vacío", description: "No lleves trastos innecesarios. Más peso es igual a más consumo de energía.", category: "transporte", icon: "📦" },
+            { id: 90, title: "Motor parado", description: "Si vas a parar más de un minuto, apaga el motor. Contamina menos arrancar de nuevo.", category: "transporte", icon: "🛑" },
+            { id: 91, title: "Teletrabajo", description: "Si tu empresa lo permite, un día de teletrabajo ahorra horas de tráfico y humo.", category: "transporte", icon: "💻" },
+            { id: 92, title: "Patinete eléctrico", description: "Ideal para la 'última milla' si el transporte público te deja lejos de casa.", category: "transporte", icon: "🛴" },
+            { id: 93, title: "Mantenimiento al día", description: "Un motor bien reglado quema combustible de forma más limpia.", category: "transporte", icon: "🔧" },
+            { id: 94, title: "Usa marchas largas", description: "Cambia a una marcha superior cuanto antes (a 2000-2500 rpm) para eficiencia.", category: "transporte", icon: "📈" },
+            { id: 95, title: "Planifica la ruta", description: "Evita dar vueltas buscando un sitio. Usa apps para encontrar el camino más corto.", category: "transporte", icon: "🗺️" },
+            { id: 96, title: "Escaleras vs Ascensor", description: "Sube a pie. Ahorras electricidad y mejoras tu salud cardiovascular.", category: "transporte", icon: "🏃" },
+            { id: 97, title: "Zonas peatonales", description: "Apoya el comercio en zonas sin coches. Mejora la vida social y el aire local.", category: "transporte", icon: "🏘️" },
+            { id: 98, title: "Coche eficiente", description: "Si vas a comprar, elige híbridos, eléctricos o de bajo consumo real.", category: "transporte", icon: "🔌" },
+            { id: 99, title: "Sin portaequipajes", description: "Quítalo si no lo usas. Empeora la aerodinámica y sube el consumo un 10%.", category: "transporte", icon: "🎒" },
+            { id: 100, title: "Bicibús escolar", description: "Organiza con otros padres ir al colegio en bici en grupo. Seguro y divertido.", category: "transporte", icon: "🎒" },
+            { id: 101, title: "Borra correos viejos", description: "Guardar basura digital en la nube gasta energía constante en servidores remotos.", category: "tecnologia", icon: "📧" },
+            { id: 102, title: "Baja el brillo", description: "Reduce el brillo de tu monitor. Tus ojos y la batería de tu portátil lo agradecerán.", category: "tecnologia", icon: "🔆" },
+            { id: 103, title: "Usa Ecosia", description: "Este buscador planta árboles con los beneficios de sus anuncios.", category: "tecnologia", icon: "🌳" },
+            { id: 104, title: "Modo Oscuro", description: "En pantallas OLED, el modo oscuro ahorra mucha energía al apagar píxeles.", category: "tecnologia", icon: "🌚" },
+            { id: 105, title: "Router apagado", description: "Apágalo de noche si nadie lo usa. Es un pequeño ahorro continuo.", category: "tecnologia", icon: "📡" },
+            { id: 106, title: "No cambies por moda", description: "Aguanta tu móvil 3 o 4 años. La minería de materiales es devastadora.", category: "tecnologia", icon: "📱" },
+            { id: 107, title: "Reciclaje electrónico", description: "Lleva móviles viejos a puntos limpios para recuperar metales valiosos.", category: "tecnologia", icon: "♻️" },
+            { id: 108, title: "Cables vs Wi-Fi", description: "La conexión por cable ethernet es más estable y energéticamente eficiente.", category: "tecnologia", icon: "🧶" },
+            { id: 109, title: "Carga al 80%", description: "Mantener la batería entre 20% y 80% alarga su vida útil meses o años.", category: "tecnologia", icon: "🔋" },
+            { id: 110, title: "Sin autoplay", description: "Desactiva que los videos se reproduzcan solos. Ahorras datos y energía.", category: "tecnologia", icon: "⏯️" },
+            { id: 111, title: "Modo Ahorro", description: "Actívalo siempre que no necesites toda la potencia del procesador.", category: "tecnologia", icon: "🔋" },
+            { id: 112, title: "Repara pantallas", description: "Si se rompe el cristal, no cambies el móvil. Busca servicios técnicos locales.", category: "tecnologia", icon: "📱" },
+            { id: 113, title: "Links en vez de adjuntos", description: "Subir a una nube compartida gasta menos que enviar el mismo archivo a 20 personas.", category: "tecnologia", icon: "🔗" },
+            { id: 114, title: "Sin salvapantallas", description: "Es mejor que la pantalla se apague del todo a que muestre animaciones.", category: "tecnologia", icon: "🖥️" },
+            { id: 115, title: "Reacondicionado", description: "Compra gadgets usados revisados. Evitas la fabricación de un producto nuevo.", category: "tecnologia", icon: "🏷️" },
+            { id: 116, title: "Desinstala apps", description: "Apps que no usas consumen batería en segundo plano buscando actualizaciones.", category: "tecnologia", icon: "🗑️" },
+            { id: 117, title: "Dona hardware", description: "PCs viejos pueden servir a ONGs o escuelas con sistemas ligeros (Linux).", category: "tecnologia", icon: "🎁" },
+            { id: 118, title: "Streaming moderado", description: "No necesitas 4K en una pantalla de móvil. Baja la calidad para ahorrar energía global.", category: "tecnologia", icon: "🎬" },
+            { id: 119, title: "Limpia ventiladores", description: "El polvo hace que el PC se caliente y consuma más electricidad para enfriarse.", category: "tecnologia", icon: "🧹" },
+            { id: 120, title: "Código abierto", description: "Suele ser software más eficiente y permite reutilizar hardware antiguo.", category: "tecnologia", icon: "📂" },
+            { id: 121, title: "Plantas melíferas", description: "Planta lavanda o romero. Ayudarás a las abejas a encontrar comida en la ciudad.", category: "naturaleza", icon: "🐝" },
+            { id: 122, title: "Sin pesticidas", description: "Usa remedios naturales como agua con jabón potásico para las plagas.", category: "naturaleza", icon: "🐜" },
+            { id: 123, title: "Hoteles de insectos", description: "Crea refugios con troncos y paja para mariquitas y abejas solitarias.", category: "naturaleza", icon: "🏨" },
+            { id: 124, title: "Fuentes públicas", description: "Usa fuentes en vez de comprar agua embotellada cuando estés fuera.", category: "naturaleza", icon: "⛲" },
+            { id: 125, title: "Plogging", description: "Recoge basura mientras caminas o corres por el campo. Limpia tu entorno.", category: "naturaleza", icon: "🏃" },
+            { id: 126, title: "Respeta senderos", description: "No pises fuera de los caminos marcados para no erosionar ni aplastar nidos.", category: "naturaleza", icon: "🥾" },
+            { id: 127, title: "No alimentes fauna", description: "La comida humana enferma a los animales y les hace dependientes.", category: "naturaleza", icon: "🦌" },
+            { id: 128, title: "Planta un árbol", description: "Busca grupos locales de reforestación. Es el mejor legado para el futuro.", category: "naturaleza", icon: "🌳" },
+            { id: 129, title: "Silencio natural", description: "Evita ruidos fuertes en el campo para no estresar a las aves en cría.", category: "naturaleza", icon: "🤫" },
+            { id: 130, title: "Miel local", description: "Apoya a apicultores locales que cuidan de las colonias de abejas cercanas.", category: "naturaleza", icon: "🍯" },
+            { id: 131, title: "Crema biodegradable", description: "Usa protectores solares sin oxibenzona para proteger la vida en ríos y mares.", category: "naturaleza", icon: "🌊" },
+            { id: 132, title: "Apoya reservas", description: "Visita parques nacionales pagando entrada. Ese dinero financia la conservación.", category: "naturaleza", icon: "🎟️" },
+            { id: 133, title: "Abono orgánico", description: "Usa humus de lombriz en vez de fertilizantes químicos industriales.", category: "naturaleza", icon: "🪱" },
+            { id: 134, title: "Sin especies exóticas", description: "Nunca compres mascotas exóticas; su comercio destruye ecosistemas lejanos.", category: "naturaleza", icon: "🦜" },
+            { id: 135, title: "Luz exterior baja", description: "Reduce la luz de tu jardín para no desorientar a insectos y aves nocturnas.", category: "naturaleza", icon: "💡" },
+            { id: 136, title: "Limpieza de playas", description: "Dedica 10 minutos a recoger plásticos cada vez que vayas a la costa.", category: "naturaleza", icon: "🏖️" },
+            { id: 137, title: "Compost de suelo", description: "Deja que las hojas secas se descompongan en la tierra; son su abrigo natural.", category: "naturaleza", icon: "🍂" },
+            { id: 138, title: "Sin globos fuera", description: "Los globos que sueltas acaban en el mar asfixiando tortugas. Usa burbujas.", category: "naturaleza", icon: "🎈" },
+            { id: 139, title: "Jardines verticales", description: "Incluso una pared verde ayuda a refrescar la ciudad y capturar polvo.", category: "naturaleza", icon: "🌿" },
+            { id: 140, title: "Conoce lo local", description: "Aprende el nombre de 5 árboles de tu barrio. Lo que se conoce, se cuida.", category: "naturaleza", icon: "📖" },
+            { id: 141, title: "Swap de ropa", description: "Organiza tardes con amigos para intercambiar prendas que ya no usáis.", category: "comunidad", icon: "👗" },
+            { id: 142, title: "Comercio justo", description: "Paga el precio real que dignifica al productor, no solo el más barato.", category: "comunidad", icon: "☕" },
+            { id: 143, title: "Huerto comunitario", description: "Participa en espacios compartidos de cultivo en tu barrio.", category: "comunidad", icon: "🏘️" },
+            { id: 144, title: "Bibliotecas públicas", description: "Compartir libros ahorra papel y fomenta la cultura accesible a todos.", category: "comunidad", icon: "📚" },
+            { id: 145, title: "Apoya el barrio", description: "Compra en la tienda de la esquina. Menos camiones de reparto y más vida social.", category: "comunidad", icon: "🏪" },
+            { id: 146, title: "Préstamo de cosas", description: "Usa apps de barrio para prestar escaleras, carretillas o tiendas de campaña.", category: "comunidad", icon: "🤝" },
+            { id: 147, title: "Economía circular", description: "Lleva tus zapatos al zapatero. Apoyas oficios antiguos y generas menos basura.", category: "comunidad", icon: "👞" },
+            { id: 148, title: "Bancos de tiempo", description: "Cambia una hora de clase de inglés por una hora de arreglo de jardín.", category: "comunidad", icon: "⏳" },
+            { id: 149, title: "Sobriedad feliz", description: "Disfruta de lo que tienes. La verdadera ecología empieza por el desapego.", category: "comunidad", icon: "😊" },
+            { id: 150, title: "Educa con el ejemplo", description: "Los niños no escuchan consejos, ven conductas. Sé coherente.", category: "comunidad", icon: "🧒" },
+            { id: 151, title: "Cooperativas luz", description: "Pásate a comercializadoras que solo vendan energía 100% renovable.", category: "comunidad", icon: "🔋" },
+            { id: 152, title: "Inserción social", description: "Compra productos hechos por talleres de personas en riesgo de exclusión.", category: "comunidad", icon: "🛡️" },
+            { id: 153, title: "Voluntariado", description: "Dedica una mañana al mes a una causa ambiental o social cercana.", category: "comunidad", icon: "🧤" },
+            { id: 154, title: "Reciclaje de barrio", description: "Ayuda a vecinos mayores a llevar sus residuos pesados al punto limpio.", category: "comunidad", icon: "🏘️" },
+            { id: 155, title: "Trueque de juguetes", description: "Antes de Navidad, organiza un mercadillo de intercambio para niños.", category: "comunidad", icon: "🧸" },
+            { id: 156, title: "Turismo respetuoso", description: "Viaja para aprender, no para consumir. Respeta el silencio y la cultura.", category: "comunidad", icon: "🗺️" },
+            { id: 157, title: "Sin envases en fiestas", description: "En cumpleaños, usa vasos de vidrio marcados con nombres para no gastar.", category: "comunidad", icon: "🥳" },
+            { id: 158, title: "Cuida el parque", description: "Trata los espacios públicos como si fueran el salón de tu casa.", category: "comunidad", icon: "⛲" },
+            { id: 159, title: "Cultura local", description: "Consumir arte de tu ciudad ahorra viajes de artistas y apoya el talento.", category: "comunidad", icon: "🎭" },
+            { id: 160, title: "¿Lo necesito?", description: "Antes de comprar, espera 24h. La mayoría de impulsos desaparecen solos.", category: "comunidad", icon: "🤔" },
+            { id: 161, title: "Donación de sangre", description: "Un acto de solidaridad que salva vidas y refuerza el tejido social comunitario.", category: "comunidad", icon: "🩸" },
+            { id: 162, title: "Participación ciudadana", description: "Asiste a reuniones de vecinos o ayuntamiento para proponer mejoras ecológicas.", category: "comunidad", icon: "🗣️" }
+
+        ];
+
+        let currentCategory = 'todos';
+        let searchQuery = '';
+
+        function renderTips() {
+            const grid = document.getElementById('tipsGrid');
+            const emptyState = document.getElementById('emptyState');
+            const counter = document.getElementById('tipsCount');
+            
+            const filteredTips = tips.filter(tip => {
+                const matchesCategory = currentCategory === 'todos' || tip.category === currentCategory;
+                const matchesSearch = tip.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                                     tip.description.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+
+            counter.innerText = filteredTips.length;
+
+            if (filteredTips.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            grid.innerHTML = filteredTips.map(tip => `
+                <article class="tip-card bg-white p-6 rounded-3xl border border-green-50 flex flex-col h-full shadow-sm hover:border-green-300 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-16 h-16 bg-green-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
+                    
+                    <div class="flex justify-between items-start mb-4 relative z-10">
+                        <div class="w-12 h-12 bg-green-50 rounded-2xl flex items-center justify-center text-2xl shadow-sm group-hover:bg-green-100 transition-colors">
+                            ${tip.icon}
+                        </div>
+                        <span class="text-[10px] font-bold uppercase tracking-widest px-2 py-1 bg-gray-50 text-gray-500 rounded-lg border border-gray-100">
+                            ${tip.category}
+                        </span>
+                    </div>
+                    
+                    <h3 class="text-lg font-bold text-green-900 mb-3 leading-tight group-hover:text-green-700 transition-colors relative z-10">
+                        ${tip.title}
+                    </h3>
+                    
+                    <p class="text-gray-600 text-sm leading-relaxed relative z-10">
+                        ${tip.description}
+                    </p>
+                </article>
+            `).join('');
+        }
+
+        function filterTips(category) {
+            currentCategory = category;
+            document.querySelectorAll('.category-pill').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('onclick').includes(`'${category}'`)) {
+                    btn.classList.add('active');
+                }
+            });
+            renderTips();
+        }
+
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            renderTips();
+        });
+
+        // Inicializar
+        window.onload = renderTips;
+    </script>
+</body>
+</html>
